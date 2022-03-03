@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "BufferCaal",
+	"webDir": "dist",
+	"bundledWebRuntime": false
+}
