@@ -1,6 +1,16 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router';
+import { useSQLite } from 'vue-sqlite-hook';
+import { useState } from '@/composables/state';
+
+//Existing Connections
+const [existConn, setExistConn] = useState(false);
+
+// Listeners onProgressImport and Export
+const [jsonListeners, setJsonListeners] = useState(false);
+const [isModal, setIsModal] = useState(false);
+const [message, setMessage] = useState("");
 
 import { IonicVue } from '@ionic/vue';
 
@@ -23,10 +33,26 @@ import '@ionic/vue/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 
-const app = createApp(App)
+import { store } from './store'
+
+const app = createApp(App).use(store)
   .use(IonicVue)
-  .use(router);
-  
+  .use(router)
+
+
+// SQLite Hook definition
+app._context.config.globalProperties.$sqlite = useSQLite({
+});
+
+// Listeners onProgressImport and Export
+app.config.globalProperties.$isModalOpen = {isModal: isModal, setIsModal: setIsModal};
+app.config.globalProperties.$isJsonListeners = {jsonListeners: jsonListeners, setJsonListeners: setJsonListeners};
+app.config.globalProperties.$messageContent = {message: message, setMessage: setMessage};
+
+//  Existing Connections
+app.config.globalProperties.$existingConn = {existConn: existConn, setExistConn: setExistConn};
+
+
 router.isReady().then(() => {
   app.mount('#app');
 });
