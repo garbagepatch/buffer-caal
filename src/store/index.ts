@@ -23,119 +23,119 @@ const state: State = {
             {
                 "id": 1,
                 "BufferId": 1,
-                "Comp": "A",
+                "Comp": "BASE",
                 "MW": 82.03,
                 "Name": "Sodium Acetate Anhydrous"
             },
             {
                 "id": 2,
                 "BufferId": 1,
-                "Comp": "HA",
+                "Comp": "ACID",
                 "MW": 17.4,
                 "Name": "Glacial Acetic Acid"
             },
             {
                 "id":3,
                 "BufferId": 1,
-                "Comp": "A",
+                "Comp": "BASE",
                 "MW": 136.08,
                 "Name": "Sodium Acetate Trihydrate"
             },
             {
                 "id":4,
                 "BufferId": 2,
-                "Comp": "HA",
+                "Comp": "ACID",
                 "MW": 137.99,
                 "Name": "Sodium Phosphate Monobasic Monohydrate"
             },
             {
                 "id": 5,
                 "BufferId": 2,
-                "Comp": "HA",
+                "Comp": "ACID",
                 "MW": 156.01,
                 "Name": "Sodium Phosphate Monobasic Dihydrate"
             },
             {
                 "id": 6,
                 "BufferId": 2,
-                "Comp": "HA",
+                "Comp": "ACID",
                 "MW": 119.98,
                 "Name": "Sodium Phosphate Monobasic Anhydrous"
             },
             {
                 "id": 7,
                 "BufferId": 2,
-                "Comp": "A",
+                "Comp": "BASE",
                 "MW": 141.96,
                 "Name": "Sodium Phosphate Dibasic Anhydrous"
             },
             {
                 "id": 8,
                 "BufferId": 2,
-                "Comp": "A",
+                "Comp": "BASE",
                 "MW": 177.99,
                 "Name": "Sodium Phosphate Dibasic Dihydrate"
             },
             {
                 "id" : 9,
                 "BufferId": 2,
-                "Comp": "A",
+                "Comp": "BASE",
                 "MW": 268.07,
                 "Name": "Sodium Phosphate Dibasic Heptahydrate"
             },
             {
                 "id":10,
                 "BufferId": 3,
-                "Comp": "A",
+                "Comp": "BASE",
                 "MW": 121.14,
                 "Name": "Tris"
             },
             {
                 "id": 11,
                 "BufferId": 3,
-                "Comp": "HA",
+                "Comp": "ACID",
                 "MW": 157.6,
                 "Name": "Tris HCl"
             },
             {
                 "id": 12,
                 "BufferId": 4,
-                "Comp": "HA",
+                "Comp": "ACID",
                 "MW": 209.26,
                 "Name": "MOPS"
             },
             {
                 "id":13,
                 "BufferId": 4,
-                "Comp": "A",
+                "Comp": "BASE",
                 "MW": 231.25,
                 "Name": "MOPS Sodium"
             },
             {
                 "id": 14,
                 "BufferId": 5,
-                "Comp": "HA",
+                "Comp": "ACID",
                 "MW": 195.24,
                 "Name": "MES"
             },
             {
                 "id": 15,
                 "BufferId": 5,
-                "Comp": "A",
+                "Comp": "BASE",
                 "MW": 217.22,
                 "Name": "MES Sodium"
             },
             {
                 "id": 16,
                 "BufferId": 6,
-                "Comp": "HA",
+                "Comp": "ACID",
                 "MW": 238.61,
                 "Name": "HEPES"
             },
             {
                 "id": 17,
                 "BufferId": 6,
-                "Comp": "A",
+                "Comp": "BASE",
                 "MW": 260.28,
                 "Name": "HEPES Sodium"
             }

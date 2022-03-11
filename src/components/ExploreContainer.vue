@@ -57,8 +57,8 @@
             <ion-col>
               <ion-item>
                 <ion-label position="floating"> A Component </ion-label>
-                <ion-select :interface-options="options" v-model="selectedA" >
-                  <ion-select-option v-for="a in aList" :key="a" :value="a">{{
+                <ion-select :interface-options="options" v-model="selectedA" v-bind:style="{width: fitContent}" class="popover-wide" >
+                  <ion-select-option v-for="a in aList" :key="a" :value="a" v-bind:style="{width: fitContent}">{{
                     a.Name
                   }}</ion-select-option>
                 </ion-select>
@@ -97,6 +97,13 @@ import { IonSelect, IonSelectOption, IonInput, IonButton } from "@ionic/vue";
 
 export default defineComponent({
   name: "ExploreContainer",
+  cssClass: 'this-interface',
+  setup() {
+    const options: any ={
+      cssClass:'popover-wide'
+    };
+    return { options }
+  },
   props: {
     name: String,
   },
@@ -135,10 +142,10 @@ export default defineComponent({
         return item.BufferId === buffer.ID;
       });
       this.haList = tempChemicals.filter(function (comp: Chemical) {
-        return comp.Comp.match("HA");
+        return comp.Comp.match("ACID");
       });
       this.aList = tempChemicals.filter(function (comp: Chemical) {
-        return comp.Comp.match("A");
+        return comp.Comp.match("BASE",);
       });
     },
 
@@ -182,104 +189,97 @@ export default defineComponent({
           0.251942 *
             (this.buffMol -
               this.buffMol / (10.0 ** (this.pH - 7.24) + 1.0) +
-              this.naclMol);
-      }
-      if (this.selectedBuffer.ID === 3) {
-        this.pkaVar =
-          8.089118 +
-          0.286552 *
-            ((this.buffMol -
-              this.buffMol / (10.0 ** (this.pH - 8.06) + 1.0) +
-              this.naclMol) **
-              0.5 /
+                this.naclMol);
+        }
+        if (this.selectedBuffer.ID === 3) {
+          this.pkaVar =
+            8.089118 +
+            0.286552 *
               ((this.buffMol -
                 this.buffMol / (10.0 ** (this.pH - 8.06) + 1.0) +
                 this.naclMol) **
-                0.5 +
-                1.0)) +
-          0.005268 *
-            (this.buffMol -
-              this.buffMol / (10.0 ** (this.pH - 8.06) + 1.0) +
-              this.naclMol);
-      }
-      if (this.selectedBuffer.ID === 4) {
-        this.pkaVar =
-          7.221505 -
-          1.197193 *
-            ((this.buffMol -
-              this.buffMol / (10.0 ** (this.pH - 7.2) + 1.0) +
-              this.naclMol) **
-              0.5 /
+                0.5 /
+                ((this.buffMol -
+                  this.buffMol / (10.0 ** (this.pH - 8.06) + 1.0) +
+                  this.naclMol) **
+                  0.5 +
+                  1.0)) +
+            0.005268 *
+              (this.buffMol -
+                this.buffMol / (10.0 ** (this.pH - 8.06) + 1.0) +
+                this.naclMol);
+        }
+        if (this.selectedBuffer.ID === 4) {
+          this.pkaVar =
+            7.221505 -
+            1.197193 *
               ((this.buffMol -
                 this.buffMol / (10.0 ** (this.pH - 7.2) + 1.0) +
                 this.naclMol) **
-                0.5 +
-                1.0)) +
-          0.870906 *
-            (this.buffMol -
-              this.buffMol / (10.0 ** (this.pH - 7.2) + 1.0) +
-              this.naclMol);
-      }
-      if (this.selectedBuffer.ID === 5) {
-        this.pkaVar =
-          6.147523 -
-          0.194272 *
-            ((this.buffMol -
-              this.buffMol / (10.0 ** (this.pH - 6.21) + 1.0) +
-              this.naclMol) **
-              0.5 /
+                0.5 /
+                ((this.buffMol -
+                  this.buffMol / (10.0 ** (this.pH - 7.2) + 1.0) +
+                  this.naclMol) **
+                  0.5 +
+                  1.0)) +
+            0.870906 *
+              (this.buffMol -
+                this.buffMol / (10.0 ** (this.pH - 7.2) + 1.0) +
+                this.naclMol);
+        }
+        if (this.selectedBuffer.ID === 5) {
+          this.pkaVar =
+            6.147523 -
+            0.194272 *
               ((this.buffMol -
                 this.buffMol / (10.0 ** (this.pH - 6.21) + 1.0) +
                 this.naclMol) **
-                0.5 +
-                1.0)) -
-          0.023826 *
-            (this.buffMol -
-              this.buffMol / (10.0 ** (this.pH - 6.21) + 1.0) +
-              this.naclMol) **
-              0.5;
-      }
-      if (this.selectedBuffer.ID === 6) {
-        this.pkaVar =
-          7.731165 -
-          0.835113 * this.naclMol -
-          0.033846 * this.pH +
-          -1.197864 * this.buffMol +
-          0.101651 * this.pH * this.naclMol +
-          0.504814 * this.buffMol * this.naclMol +
-          0.163069 * this.buffMol * this.pH +
-          0.002898 * this.pH * this.buffMol * this.naclMol;
-      }
-      this.finishCalc();
-    },
-    finishCalc() {
-      let aMW = this.selectedA.MW;
-      let haMW = this.selectedHA.MW;
-      let hamol = 0.0;
+                0.5 /
+                ((this.buffMol -
+                  this.buffMol / (10.0 ** (this.pH - 6.21) + 1.0) +
+                  this.naclMol) **
+                  0.5 +
+                  1.0)) -
+            0.023826 *
+              (this.buffMol -
+                this.buffMol / (10.0 ** (this.pH - 6.21) + 1.0) +
+                this.naclMol) **
+                0.5;
+        }
+        if (this.selectedBuffer.ID === 6) {
+          this.pkaVar =
+            7.731165 -
+            0.835113 * this.naclMol -
+            0.033846 * this.pH +
+            -1.197864 * this.buffMol +
+            0.101651 * this.pH * this.naclMol +
+            0.504814 * this.buffMol * this.naclMol +
+            0.163069 * this.buffMol * this.pH +
+            0.002898 * this.pH * this.buffMol * this.naclMol;
+        }
+        this.finishCalc();
+      },
+      finishCalc() {
+        let aMW = this.selectedA.MW;
+        let haMW = this.selectedHA.MW;
+        let hamol = 0.0;
 
-      if (this.selectedBuffer.ID === 1) {
-        this.haresult =
-          (1000 * this.buffMol) / (10.0 ** (this.pH - this.pkaVar) + 1.0) / haMW;
-        hamol = (this.haresult / 1000) * 17.4;
-      } else {
-        this.haresult = (haMW * this.buffMol) / (10.0 ** (this.pH - this.pkaVar) + 1.0);
-        hamol = this.haresult / haMW;
-      }
-      this.aresult = (this.buffMol - hamol) * aMW;
+        if (this.selectedBuffer.ID === 1) {
+          this.haresult =
+            (1000 * this.buffMol) / (10.0 ** (this.pH - this.pkaVar) + 1.0) / haMW;
+          hamol = (this.haresult / 1000) * 17.4;
+        } else {
+          this.haresult = (haMW * this.buffMol) / (10.0 ** (this.pH - this.pkaVar) + 1.0);
+          hamol = this.haresult / haMW;
+        }
+        this.aresult = (this.buffMol - hamol) * aMW;
+      },
     },
-  },
 });
 </script>
 
 <style scoped>
-#ion-select-option{
-  max-width: 70%;
-}
-#ion-select {
-  width: 100%;
-
-  justify-content: center;
-}
+ 
 #container {
   text-align: center;
   position: absolute;
@@ -293,14 +293,22 @@ export default defineComponent({
   font-size: 20px;
   line-height: 26px;
 }
-
+#this_interface_select_interface_option{
+  width: 100%
+}
 #container p {
   font-size: 16px;
   line-height: 22px;
   color: #8c8c8c;
   margin: 0;
 }
-
+#ion-popover{
+  min-width: 70%;
+}
+.popover-wide .popover{
+    max-width: 100%; 
+    /* Max Width of the popover (depending on the container!) */
+}
 #container a {
   text-decoration: none;
 }
