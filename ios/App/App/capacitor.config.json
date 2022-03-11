@@ -1,0 +1,6 @@
+{
+	"appId": "com.veridiansea.BufferCali",
+	"appName": "BufferCaal",
+	"webDir": "dist",
+	"bundledWebRuntime": false
+}
