@@ -1,6 +1,6 @@
 <template>
   <div id="container">
-    <ion-card>
+    <ion-card id="ion-card">
       <ion-card-header>
         <ion-card-title>Buffer Input</ion-card-title>
       </ion-card-header>
@@ -27,7 +27,7 @@
         </ion-item>
       </ion-card-content>
     </ion-card>
-    <ion-card>
+    <ion-card id="ion-card">
       <ion-card-header>
         <ion-card-title>Results</ion-card-title>
       </ion-card-header>
@@ -37,7 +37,7 @@
             <ion-col>
               <ion-item>
                 <ion-label position="floating"> HA Component </ion-label>
-                <ion-select :interface-options="options" v-model="selectedHA">
+                <ion-select :interface-options="options" interface="action-sheet" v-model="selectedHA">
                   <ion-select-option v-for="ha in haList" :key="ha" :value="ha">{{
                     ha.Name
                   }}</ion-select-option>
@@ -46,9 +46,11 @@
             </ion-col>
             <ion-col>
               <ion-item>
-                <ion-label position="floating" slot="start"> HA Results </ion-label>
-                <ion-label slot="end">
+                <ion-label position="stacked" slot="start"> {{selectedHA.Name}} Results </ion-label>
+                <ion-input  readonly type="number" >
                   {{ haresult }}
+                </ion-input>
+                <ion-label position="stacked" slot="end">{{ haunits }}
                 </ion-label>
               </ion-item>
             </ion-col>
@@ -57,7 +59,7 @@
             <ion-col>
               <ion-item>
                 <ion-label position="floating"> A Component </ion-label>
-                <ion-select :interface-options="options" v-model="selectedA" v-bind:style="{width: fitContent}" class="popover-wide" >
+                <ion-select :interface-options="options" interface="action-sheet" v-model="selectedA" >
                   <ion-select-option v-for="a in aList" :key="a" :value="a" v-bind:style="{width: fitContent}">{{
                     a.Name
                   }}</ion-select-option>
@@ -66,10 +68,11 @@
             </ion-col>
             <ion-col>
               <ion-item>
-                <ion-label position="floating" slot="start"> A Results </ion-label>
-                <ion-label slot="end">
+                <ion-label position="stacked" slot="start"> {{selectedA.Name}}  Results </ion-label>
+                <ion-input readonly type="number">
                   {{ aresult }}
-                </ion-label>
+                </ion-input>
+                <ion-label position="stacked" slot="end">{{aunits}}</ion-label>
               </ion-item>
             </ion-col>
           </ion-row>
@@ -118,6 +121,9 @@ export default defineComponent({
       naclMol: 0.0,
       selectedHA: {} as Chemical,
       selectedA: {} as Chemical,
+      haunits: '',
+      aunits:'',
+
       aresult: 0.0,
       haresult: 0.0,
       pkaVar: 0.0,
@@ -263,14 +269,16 @@ export default defineComponent({
         let aMW = this.selectedA.MW;
         let haMW = this.selectedHA.MW;
         let hamol = 0.0;
-
+        this.aunits = 'g/L';
         if (this.selectedBuffer.ID === 1) {
           this.haresult =
             (1000 * this.buffMol) / (10.0 ** (this.pH - this.pkaVar) + 1.0) / haMW;
           hamol = (this.haresult / 1000) * 17.4;
+          this.haunits = 'mL/L'
         } else {
           this.haresult = (haMW * this.buffMol) / (10.0 ** (this.pH - this.pkaVar) + 1.0);
           hamol = this.haresult / haMW;
+          this.haunits = 'g/L';
         }
         this.aresult = (this.buffMol - hamol) * aMW;
       },
@@ -279,7 +287,9 @@ export default defineComponent({
 </script>
 
 <style scoped>
- 
+#ion-card{
+  background-color: gray;
+}
 #container {
   text-align: center;
   position: absolute;
